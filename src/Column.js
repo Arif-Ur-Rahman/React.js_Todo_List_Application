@@ -34,12 +34,6 @@ const Column = ({ title, todos, addTodo, moveTodo }) => {
           <button onClick={handleAddTodo}>Add Todo</button>
         </div>
       )}
-      {title === 'Ongoing' && (
-        <div className="ongoing-todo-form">
-          <label htmlFor="dueDate">Set Due Date: </label>
-          <input type="datetime-local" id="dueDate" name="dueDate" />
-        </div>
-      )}
       <div className="todo-items">
         {todos.map(todo => (
           <TodoItem key={todo.id} todo={todo} moveTodo={moveTodo} />
