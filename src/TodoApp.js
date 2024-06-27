@@ -1,4 +1,3 @@
-// src/TodoApp.js
 import React, { useState, useEffect } from 'react';
 import Column from './Column';
 
@@ -25,13 +24,18 @@ const TodoApp = () => {
       description,
       status: 'New'
     };
-    setTodos([...todos, newTodo]);
+    setTodos([newTodo, ...todos]); // Add new task at the top of the New column
   };
 
   const moveTodo = (id, newStatus) => {
-    setTodos(todos.map(todo =>
+    const updatedTodos = todos.map(todo =>
       todo.id === id ? { ...todo, status: newStatus } : todo
-    ));
+    );
+    if (newStatus === 'Ongoing') {
+      const movedTodo = updatedTodos.find(todo => todo.id === id);
+      movedTodo.dueDate = null; // Reset due date when moving to Ongoing
+    }
+    setTodos(updatedTodos);
   };
 
   return (
