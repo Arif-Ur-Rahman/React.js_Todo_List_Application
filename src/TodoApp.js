@@ -24,7 +24,7 @@ const TodoApp = () => {
       description,
       status: 'New'
     };
-    setTodos([newTodo, ...todos]); // Add new task at the top of the New column
+    setTodos([newTodo, ...todos]); 
   };
 
   const moveTodo = (id, newStatus) => {
@@ -33,16 +33,22 @@ const TodoApp = () => {
     );
     if (newStatus === 'Ongoing') {
       const movedTodo = updatedTodos.find(todo => todo.id === id);
-      movedTodo.dueDate = null; // Reset due date when moving to Ongoing
+      movedTodo.dueDate = null; 
     }
     setTodos(updatedTodos);
   };
 
   return (
     <div className="todo-app">
-      <Column title="New" todos={todos.filter(todo => todo.status === 'New')} addTodo={addTodo} moveTodo={moveTodo} />
-      <Column title="Ongoing" todos={todos.filter(todo => todo.status === 'Ongoing')} moveTodo={moveTodo} />
-      <Column title="Done" todos={todos.filter(todo => todo.status === 'Done')} moveTodo={moveTodo} />
+      <header className="header">
+        <h1>Welcome To Kadritech AB Todo</h1>
+        <h2>Developed By Arif Ur Rahman</h2>
+      </header>
+      <div className="columns">
+        <Column title="New" todos={todos.filter(todo => todo.status === 'New')} addTodo={addTodo} moveTodo={moveTodo} />
+        <Column title="Ongoing" todos={todos.filter(todo => todo.status === 'Ongoing')} moveTodo={moveTodo} />
+        <Column title="Done" todos={todos.filter(todo => todo.status === 'Done')} moveTodo={moveTodo} />
+      </div>
     </div>
   );
 };

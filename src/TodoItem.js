@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const TodoItem = ({ todo, moveTodo }) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
-  const [dueDate, setDueDate] = useState(null); // State for due date
+  const [dueDate, setDueDate] = useState(null); 
 
   const handleContextMenu = (e) => {
     e.preventDefault();
