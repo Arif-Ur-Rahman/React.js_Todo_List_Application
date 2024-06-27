@@ -1,4 +1,3 @@
-// src/TodoApp.js
 import React, { useState, useEffect } from 'react';
 import Column from './Column';
 
@@ -25,20 +24,31 @@ const TodoApp = () => {
       description,
       status: 'New'
     };
-    setTodos([...todos, newTodo]);
+    setTodos([newTodo, ...todos]); 
   };
 
   const moveTodo = (id, newStatus) => {
-    setTodos(todos.map(todo =>
+    const updatedTodos = todos.map(todo =>
       todo.id === id ? { ...todo, status: newStatus } : todo
-    ));
+    );
+    if (newStatus === 'Ongoing') {
+      const movedTodo = updatedTodos.find(todo => todo.id === id);
+      movedTodo.dueDate = null; 
+    }
+    setTodos(updatedTodos);
   };
 
   return (
     <div className="todo-app">
-      <Column title="New" todos={todos.filter(todo => todo.status === 'New')} addTodo={addTodo} moveTodo={moveTodo} />
-      <Column title="Ongoing" todos={todos.filter(todo => todo.status === 'Ongoing')} moveTodo={moveTodo} />
-      <Column title="Done" todos={todos.filter(todo => todo.status === 'Done')} moveTodo={moveTodo} />
+      <header className="header">
+        <h1>Welcome To Kadritech AB Todo</h1>
+        <h2>Developed By Arif Ur Rahman</h2>
+      </header>
+      <div className="columns">
+        <Column title="New" todos={todos.filter(todo => todo.status === 'New')} addTodo={addTodo} moveTodo={moveTodo} />
+        <Column title="Ongoing" todos={todos.filter(todo => todo.status === 'Ongoing')} moveTodo={moveTodo} />
+        <Column title="Done" todos={todos.filter(todo => todo.status === 'Done')} moveTodo={moveTodo} />
+      </div>
     </div>
   );
 };
